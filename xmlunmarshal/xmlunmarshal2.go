@@ -28,10 +28,18 @@ type Reference struct {
 	Actions []Action `xml:"action"`
 }
 
+type Handle struct {
+	XMLName    xml.Name
+	References []Reference `xml:"reference"`
+	Blocks     []Block     `xml:"block"`
+}
+
 type Layout struct {
 	Output     string      `xml:"Config>Output"`
 	Groups     []string    `xml:"Config>Group>Value"`
 	References []Reference `xml:"reference"`
+	Blocks     []Block     `xml:"block"`
+	Handles    []Handle    `xml:",any"`
 }
 
 type LayoutElement interface {
@@ -66,17 +74,34 @@ func (this *Reference) GetActions() []Action {
 	return this.Actions
 }
 
+/** Handle methods */
+func (this *Handle) GetReferences() []Reference {
+	return this.References
+}
+
+func (this *Handle) GetBlocks() []Block {
+	return this.Blocks
+}
+
+func (this *Handle) GetActions() []Action {
+	return nil
+}
+
 /** Layout methods */
 func (this *Layout) GetReferences() []Reference {
 	return this.References
 }
 
 func (this *Layout) GetBlocks() []Block {
-	return nil
+	return this.Blocks
 }
 
 func (this *Layout) GetActions() []Action {
 	return nil
+}
+
+func (this *Layout) GetHandles() []Handle {
+	return this.Handles
 }
 
 func dumpLayoutElement(layoutElement LayoutElement, indent int) {
@@ -106,6 +131,10 @@ func (this *Reference) dump() {
 }
 func (this *Layout) dump() {
 	dumpLayoutElement(this, 0)
+	for _, handle := range this.GetHandles() {
+		fmt.Println("handle: " + handle.XMLName.Local)
+		dumpLayoutElement(&handle, 1)
+	}
 }
 
 func main() {
