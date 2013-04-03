@@ -1,0 +1,1 @@
+This is a sample Page. funca bien <a href="/view/Other">Other</a>
