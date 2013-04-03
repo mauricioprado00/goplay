@@ -1,0 +1,34 @@
+<layout version="1.0.0.0">
+    <Config>
+        <Output>Html</Output>
+        <Group>
+            <Value>utf8</Value>
+            <Value>no-robot</Value>
+        </Group>
+    </Config>
+	<reference name="content">
+		<action method="someMethod1">
+			<param>bla</param>
+			<param>ble</param>
+		</action>
+		<block type="catalog/product_view" name="product.info" template="catalog/product/view.phtml">
+			<action method="someMethod">
+				
+			</action>
+			<block type="catalog/product_view_media" name="product.info.media" as="media" template="catalog/product/view/media.phtml"/>
+			<block type="core/text_list" name="alert.urls" as="alert_urls" translate="label">
+				<label>Alert Urls</label>
+			</block>
+            <block type="catalog/product_view_type_grouped" name="product.info.grouped" as="product_type_data" template="catalog/product/view/type/grouped.phtml">
+                <block type="core/text_list" name="product.info.grouped.extra" as="product_type_data_extra" translate="label">
+                    <label>Product Extra Info</label>
+                </block>
+            </block>
+		</block>
+	</reference>
+	<reference name="left">
+		<block type="catalog/category_view" name="category.info" template="catalog/category/view.phtml">
+			<block type="catalog/category_view_media" name="category.info.media" as="media" template="catalog/category/view/media.phtml"/>
+		</block>
+	</reference>
+</layout>
