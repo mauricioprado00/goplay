@@ -30,6 +30,7 @@ func main() {
     }
 
     // http query
+    // https://golang.org/pkg/net/http/
     client := &http.Client{}
 
     req, _ := http.NewRequest("GET", configuration.UrlList, nil)
@@ -47,6 +48,10 @@ func main() {
     // return;
 
     // decode result
+    // https://golang.org/pkg/encoding/json/
+    // http://blog.golang.org/json-and-go
+    // https://coderwall.com/p/4c2zig/decode-top-level-json-array-into-a-slice-of-structs-in-golang
+    // https://gobyexample.com/json
     decoder = json.NewDecoder(resp.Body)
     products := shopify.Products{}
     err = decoder.Decode(&products)
