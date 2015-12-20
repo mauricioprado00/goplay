@@ -1,4 +1,7 @@
 {
-    "Token": "3a2e6a2fbd5f05366c3c80fc4ed3eb17",
-    "UrlCount": "https://youfoodz.myshopify.com/admin/products/count.json"
+    "Token": "xxx",
+    "UrlCount": "https://youfoodz.myshopify.com/admin/products/count.json",
+    "UrlList": "https://youfoodz.myshopify.com/admin/products.json",
+    "_UrlList": "http://localhost/products.json",
+    "Limit": 50
 }

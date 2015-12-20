@@ -5,13 +5,10 @@ import (
     "encoding/json"
     "net/http"
     "os"
-    //"io/ioutil"
     "./shopify"
 )
 
-/**
- * https://gobyexample.com/json
- */
+
 func main() {
 
     file, err := os.Open("config.json")
@@ -32,29 +29,21 @@ func main() {
     // http query
     client := &http.Client{}
 
-    req, _ := http.NewRequest("GET", configuration.UrlList, nil)
+    req, _ := http.NewRequest("GET", configuration.UrlCount, nil)
 
     req.Header.Add("X-Shopify-Access-Token", configuration.Token)
     resp, _ := client.Do(req)
 
     defer resp.Body.Close()
 
-
-    // body, _ := ioutil.ReadAll(resp.Body)
-
-    // fmt.Printf("%s\n", body)
-
-    // return;
-
     // decode result
     decoder = json.NewDecoder(resp.Body)
-    products := shopify.Products{}
-    err = decoder.Decode(&products)
+    countResult := shopify.CountResult{}
+    err = decoder.Decode(&countResult)
     if err != nil {
       fmt.Println("error:", err)
       return;
     }
 
-    fmt.Printf("%+v\n", products)
-    fmt.Printf("%+v\n", configuration)
+    fmt.Printf("%+v\n", countResult.Count)
 }
